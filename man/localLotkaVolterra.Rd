@@ -4,8 +4,18 @@
 \alias{localLotkaVolterra}
 \title{Lotka-Volterra with local predation interactions}
 \usage{
-localLotkaVolterra(par, T, replicates = 1, dim = 1, periodic = TRUE,
-  spatial = FALSE, verbose = FALSE, maxpop = 1e+06)
+localLotkaVolterra(
+  par,
+  T,
+  replicates = 1,
+  dim = 1,
+  periodic = TRUE,
+  spatial = FALSE,
+  verbose = FALSE,
+  maxpop = 1e+06,
+  fill = NA,
+  probs = seq(0, 1, 0.01)
+)
 }
 \arguments{
 \item{par}{A list containing the parameters to run the model, currently
@@ -29,7 +39,11 @@ be saved?}
 
 \item{verbose}{Boolean, to print population sizes by step?}
 
-\item{maxpop}{Maximum population size. If predator or prey population size
+\item{maxpop}{Maximum population size. If predator or prey population size}
+
+\item{fill}{Value to initially fill the population arrays. Default to NA, 0 is an option too.}
+
+\item{probs}{Vector of probabilities to compute quantiles of the predator-prey interactions. 
 get bigger, the simulation ends.}
 }
 \value{
@@ -46,22 +60,21 @@ in Brigatti et al. (2009).
 \examples{
 \dontrun{
 set.seed(880820)
-par = list(alpha=5e-4, beta=5e-4, r=0.1, m=0.05, D=list(N=8e-5, P=8e-5), 
+par = list(alpha=5e-4, gamma=0.5, r=0.1, m=0.05, D=list(N=8e-5, P=8e-5), 
 L=list(N=0.2, P=0.2))
-N0 = with(par, m/(2*beta*L$P))
+N0 = with(par, m/(2*gamma*alpha*L$P))
 P0 = with(par, r/(2*alpha*L$N))
 par$initial = list(N=round(N0), P=round(P0))
 sim = localLotkaVolterra(par, T=240, replicates=100, maxpop = 1e4)
 plot(sim)
 } 
 }
-\author{
-Ricardo Oliveros--Ramos
-}
 \references{
 Brigatti et al. 2009.
+}
+\author{
+Ricardo Oliveros--Ramos
 }
 \keyword{Lotka-volterra}
 \keyword{interactions}
 \keyword{local}
-

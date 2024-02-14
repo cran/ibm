@@ -2,8 +2,8 @@
 % Please edit documentation in R/ibm-main.R
 \docType{package}
 \name{ibm-package}
-\alias{ibm}
 \alias{ibm-package}
+\alias{ibm}
 \title{Individual based models in R}
 \description{
 Implementation of some (simple) Individual Based Models and methods 
@@ -27,10 +27,3 @@ plot(sim)
 Ricardo Oliveros-Ramos
 <ricardo.oliveros@gmail.com>
 }
-\keyword{agent}
-\keyword{based}
-\keyword{ibm,}
-\keyword{individual}
-\keyword{models}
-\keyword{models,}
-
